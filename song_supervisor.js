@@ -23,7 +23,7 @@ setInterval(() => {
   if (!playingSongId) {
     Song.findOne({
       where: {playedAt: null},
-      order: [['id', 'DESC']],
+      order: [['id', 'ASC']],
     }).then((song) => {
       if (song) {
         console.log(`Song found: ${song.url}. Playing....`);
