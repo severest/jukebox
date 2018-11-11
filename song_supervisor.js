@@ -27,13 +27,12 @@ setInterval(() => {
     }).then((song) => {
       if (song) {
         console.log(`Song found: ${song.url}. Playing....`);
+        playingSongId = song.id;
+        mpvProcess = spawn('mpv', [song.url, '--no-video']);
+        mpvProcess.on('close', resetMpv);
         song.update({
           playedAt: sequelize.fn('NOW'),
           currentlyPlaying: true,
-        }).then(() => {
-          playingSongId = song.id;
-          mpvProcess = spawn('mpv', [song.url, '--no-video']);
-          mpvProcess.on('close', resetMpv);
         });
       }
     });
