@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Song = sequelize.define('Song', {
     url: DataTypes.STRING,
@@ -6,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     currentlyPlaying: DataTypes.BOOLEAN,
     turnMeOff: DataTypes.INTEGER,
   }, {});
-  Song.associate = function(models) {
-    // associations can be defined here
-  };
+  // Song.associate = (models) => {
+  //   // associations can be defined here
+  // };
   return Song;
 };

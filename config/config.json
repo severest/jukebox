@@ -1,16 +1,19 @@
 {
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "jukebox",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+  "db": {
+    "development": {
+      "username": "root",
+      "password": null,
+      "database": "jukebox",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "jukebox_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
   },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "jukebox_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
+  "websocketPort": 9999
 }
