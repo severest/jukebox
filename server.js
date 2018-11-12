@@ -1,32 +1,25 @@
-const WebSocket = require('ws');
+const http = require('http').createServer();
+const io = require('socket.io')({
+  path: '/cable',
+  serveClient: false,
+});
+
+io.attach(http);
 
 const { websocketPort } = require('./config/config.json');
 
-const wss = new WebSocket.Server({ port: websocketPort });
+console.log(`Starting websocket server on port ${websocketPort}...`);
 
-wss.broadcast = function broadcast(data) {
-  wss.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(data);
-    }
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
   });
-};
-
-wss.on('connection', (ws) => {
-  ws.isAlive = true;
-  ws.on('pong', function pong() {
-    this.isAlive = true;
-  });
-  ws.on('message', (message) => {
-    console.log('received: %s', message);
+  socket.on('chat message', (msg) => {
+    console.log(`message: ${msg}`);
   });
 });
 
-setInterval(() => {
-  wss.clients.forEach((ws) => {
-    if (ws.isAlive === false) return ws.terminate();
-
-    ws.isAlive = false;
-    ws.ping(() => {});
-  });
-}, 30000);
+http.listen(websocketPort, () => {
+  console.log(`listening on *:${websocketPort}`);
+});
