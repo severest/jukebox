@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --hot --mode development --open",
+    "build": "NODE_ENV=production webpack --mode production",
     "server": "node server.js",
     "sequelize": "sequelize",
     "supervisor": "node song_supervisor.js",
