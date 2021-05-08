@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './styles/application.scss';
 
 // import uuid from './utils/uuid.js';
 
-import NoMatch from './NoMatch.jsx';
-import SongListApp from './SongListApp.jsx';
+import NoMatch from './NoMatch';
+import SongListApp from './SongListAppRedux';
+import store from './redux/reducers';
 
 
 // let userId = localStorage.getItem('retrobotID');
@@ -20,12 +22,13 @@ import SongListApp from './SongListApp.jsx';
 // window.addEventListener('online', () => isOnline());
 // window.addEventListener('offline', () => isOffline());
 
-
 ReactDOM.render((
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={SongListApp} />
-      <Route component={NoMatch} />
-    </Switch>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={SongListApp} />
+        <Route component={NoMatch} />
+      </Switch>
+    </BrowserRouter>
+  </Provider>
 ), document.getElementById('app'));

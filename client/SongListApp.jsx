@@ -1,15 +1,17 @@
 import React from 'react';
-import io from 'socket.io-client';
-
-const socket = io({
-  path: '/cable',
-});
-socket.emit('chat message', 'HEYOOOO');
+import PropTypes from 'prop-types';
 
 class SongListApp extends React.Component {
+  static propTypes = {
+    nodeConnected: PropTypes.bool.isRequired,
+  }
+
   render() {
     return (
-      <div>hi</div>
+      <div>
+        {this.props.nodeConnected ? '✅ ALL GOOD' : '❌ not connected'}
+        hey
+      </div>
     );
   }
 }
